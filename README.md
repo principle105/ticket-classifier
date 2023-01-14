@@ -1,1 +1,7 @@
-# hello
+# U of T thing
+
+# Configuration
+
+1. Create a `.env` file in the root directory of the repository.
+
+2. Copy the content from `.env.example` into `.env` and fill it with the necessary information.
