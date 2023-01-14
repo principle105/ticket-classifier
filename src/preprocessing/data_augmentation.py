@@ -24,8 +24,7 @@ def data_augmentation(dataset_path, augmented_path):
         # Below is basically the image opening process
         img_path = dataset_path + "/" + imgName
         img = plt.imread(img_path)
-        imgHeight = img.shape[0]
-        imgWidth = img.shape[1]
+        imgHeight, imgWidth = img.shape
 
         # This code below is specifically for brightness adjust (uses PIL)
         img_for_shading = Image.open(img_path)
@@ -41,17 +40,11 @@ def data_augmentation(dataset_path, augmented_path):
             # (i.e. large portions of the tickets go missing)
             hori_translate = random.randint(-int(imgWidth / 10), int(imgWidth / 10))
 
-            # print(f"Translated horizontally by {hori_translate} pixels.")
-            translated = imutils.translate(img, hori_translate, 0)  # Do the translation
+            translated = imutils.translate(img, hori_translate, 0)
 
             # Name and save the translated image into the augmented folder
             cv2.imwrite(
-                augmented_path
-                + "/"
-                + imgName.split("_")[1].split(".")[0]
-                + "_horiTranslate_"
-                + str(i)
-                + ".jpg",
+                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_horiTranslate_{i}.jpg",
                 cv2.cvtColor(translated, cv2.COLOR_RGB2BGR),
             )
 
@@ -61,37 +54,23 @@ def data_augmentation(dataset_path, augmented_path):
             # (i.e. large portions of the tickets go missing)
             verti_translate = random.randint(-int(imgHeight / 10), int(imgHeight / 10))
 
-            # print(f"Translated vertically by {verti_translate} pixels.")
-            translated = imutils.translate(
-                img, 0, verti_translate
-            )  # Do the translation
+            translated = imutils.translate(img, 0, verti_translate)
 
             # Name and save the translated image into the augmented folder
             cv2.imwrite(
-                augmented_path
-                + "/"
-                + imgName.split("_")[1].split(".")[0]
-                + "_vertiTranslate_"
-                + str(i)
-                + ".jpg",
+                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_vertiTranslate_{i}.jpg",
                 cv2.cvtColor(translated, cv2.COLOR_RGB2BGR),
             )
 
             # --------------------------Rotation---------------------------------------#
 
             # Randomly rotate the image
-            rotation = random.randint(0, 360)  # Generate a random rotation angle
-            # print(f"Rotated by {rotation} degrees.")
+            rotation = random.randint(0, 360)
             rotated = imutils.rotate(img, angle=rotation)
 
             # Save the rotated image into the augmented folder
             cv2.imwrite(
-                augmented_path
-                + "/"
-                + imgName.split("_")[1].split(".")[0]
-                + "_rotate_"
-                + str(i)
-                + ".jpg",
+                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_rotate_{i}.jpg",
                 cv2.cvtColor(rotated, cv2.COLOR_RGB2BGR),
             )
 
@@ -106,16 +85,9 @@ def data_augmentation(dataset_path, augmented_path):
 
             # Save the rotated image into the augmented folder
             im_output.save(
-                augmented_path
-                + "/"
-                + imgName.split("_")[1].split(".")[0]
-                + "_shaded_"
-                + str(i)
-                + ".jpg"
+                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_shaded_{i}.jpg"
             )
 
 
 if __name__ == "__main__":
     data_augmentation(REAL_FOOD_TICKET_PATH_DATASET, REAL_FOOD_TICKET_PATH_PREPROCESSED)
-    # data_augmentation("/content/drive/Shareddrives/GEC2023HACKATHON/Students/Team7/dataset/food_ticket_real")
-    # data_augmentation("/content/drive/Shared drives/GEC2023HACKATHON/Students/Team##/dataset/food_ticket_fake")
