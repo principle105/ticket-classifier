@@ -8,3 +8,4 @@ imutils
 opencv-python
 typer
 pyfiglet
+rich

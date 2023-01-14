@@ -2,6 +2,7 @@ import logging
 
 import typer
 from pyfiglet import figlet_format
+from rich import print
 
 from scripts.augment_data import augment_data
 
@@ -13,13 +14,16 @@ logging.basicConfig(level=logging.INFO)
 
 @app.command(name="augment_data")
 def _augment_data():
-    typer.echo("Augmenting data...")
+    print("[green]Augmenting Data![/green]")
     augment_data()
 
 
 @app.command()
 def info():
-    typer.echo(figlet_format("Fake Meal Ticket Classifier"))
+    text = figlet_format("Fake Meal Ticket Classifier")
+    print(
+        f"[green]{text}[/green]\n\nUtilities for detecting if a meal ticket is real or fake."
+    )
 
 
 if __name__ == "__main__":
