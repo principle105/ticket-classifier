@@ -7,18 +7,18 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageEnhance
 from tqdm import tqdm
 
-from config import (
-    N_AUGMENTATIONS,
-    REAL_FOOD_TICKET_PATH_DATASET,
-    REAL_FOOD_TICKET_PATH_PREPROCESSED,
-)
+from config import (N_AUGMENTATIONS, REAL_FOOD_TICKET_PATH_DATASET,
+                    REAL_FOOD_TICKET_PATH_PREPROCESSED)
+from utils.file_utils import create_dirs
 
 ## NOTES: Run only when you have successfully added 10 fake ticket images to the food_ticket_fake folder!
 ## Otherwise, you WILL encounter errors later!
 
 
 def data_augmentation(dataset_path, augmented_path):
-
+    create_dirs(dataset_path)
+    create_dirs(augmented_path)
+    
     # Iterate through each image we have
     for imgName in tqdm(os.listdir(dataset_path)):
         # Below is basically the image opening process
