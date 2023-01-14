@@ -22,7 +22,7 @@ def data_augmentation(dataset_path, augmented_path, n_augmentations):
         # Below is basically the image opening process
         img_path = dataset_path + "/" + imgName
         img = plt.imread(img_path)
-        imgHeight, imgWidth = img.shape
+        imgHeight, imgWidth, _ = img.shape
 
         # This code below is specifically for brightness adjust (uses PIL)
         img_for_shading = Image.open(img_path)
