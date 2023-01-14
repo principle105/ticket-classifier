@@ -6,3 +6,4 @@ venv
 .vscode
 requirements.txt
 preprocessed_dataset
+model
