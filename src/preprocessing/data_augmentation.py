@@ -7,15 +7,13 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageEnhance
 from tqdm import tqdm
 
-from config import (N_AUGMENTATIONS, REAL_FOOD_TICKET_PATH_DATASET,
-                    REAL_FOOD_TICKET_PATH_PREPROCESSED)
 from utils.file_utils import create_dirs
 
 ## NOTES: Run only when you have successfully added 10 fake ticket images to the food_ticket_fake folder!
 ## Otherwise, you WILL encounter errors later!
 
 
-def data_augmentation(dataset_path, augmented_path):
+def data_augmentation(dataset_path, augmented_path, n_augmentations):
     create_dirs(dataset_path)
     create_dirs(augmented_path)
     
@@ -31,7 +29,7 @@ def data_augmentation(dataset_path, augmented_path):
 
         # Data augmentation loop
         # We augment each photo 10 times per effect
-        for i in range(N_AUGMENTATIONS):
+        for i in range(n_augmentations):
 
             # --------------------------Horizontal Translation-------------------------#
 
@@ -87,7 +85,3 @@ def data_augmentation(dataset_path, augmented_path):
             im_output.save(
                 f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_shaded_{i}.jpg"
             )
-
-
-if __name__ == "__main__":
-    data_augmentation(REAL_FOOD_TICKET_PATH_DATASET, REAL_FOOD_TICKET_PATH_PREPROCESSED)
