@@ -16,7 +16,7 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-run_type = args.run_type
+run_type = args.task
 
 if run_type == "augment_data":
 	augment_data()
