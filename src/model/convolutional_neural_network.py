@@ -6,6 +6,7 @@ def build_model(input_shape):
     return keras.Sequential(
         [
             keras.Input(shape=input_shape),
+            L.Lambda(lambda x: x / 255.0),
 
             L.Conv2D(32, kernel_size=(16, 16), activation="relu"),
             L.MaxPooling2D(pool_size=(8, 8)),
