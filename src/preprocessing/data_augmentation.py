@@ -76,7 +76,7 @@ def data_augmentation(dataset_path: str, augmented_path: str, n_augmentations: i
 
             _save_img(_get_save_path(augmented_path, img_name, "rotate", i), rotated)
 
-            # --------------------------Brightness Adjust------------------------------#
+            # Brightness Adjust
 
             # Randomly discolour the image
             brightness = random.uniform(0.5, 1.5)

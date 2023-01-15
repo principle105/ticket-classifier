@@ -20,7 +20,7 @@ def _augment_data():
 
 
 @app.command(name="train_model")
-def _train_modal():
+def _train_model():
     print("[green]Training Model![/green]")
     train_model()
 
