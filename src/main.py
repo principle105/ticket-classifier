@@ -5,8 +5,8 @@ from pyfiglet import figlet_format
 from rich import print
 
 from scripts.augment_data import augment_data
-from scripts.train_model import train_model
 from scripts.classify_image import classify_image
+from scripts.train_model import train_model
 
 # Initializing cli
 app = typer.Typer()
@@ -36,7 +36,7 @@ def _classify_image(filepath: str):
 def info():
     text = figlet_format("Fake Meal Ticket Classifier")
     print(
-        f"[green]{text}[/green]\n\nUtilities for detecting if a meal ticket is real or fake."
+        f"[cyan]{text}[/cyan]\n\nUtilities for detecting if a meal ticket is [green]real[/green] or [red]fake.[/red]"
     )
 
 

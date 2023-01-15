@@ -1,10 +1,12 @@
-from utils.image_utils import load_image
-from model.convolutional_neural_network import build_model
-from config import MODEL_INPUT_SHAPE, MODEL_PATH
 import numpy as np
+from rich import print
+
+from config import MODEL_INPUT_SHAPE, MODEL_PATH
+from model.convolutional_neural_network import build_model
+from utils.image import load_image
 
 
-def classify_image(filepath):
+def classify_image(filepath: str):
     # Load the image into a format the model can understand.
     im = load_image(filepath)
     im = np.expand_dims(im, axis=0)
@@ -21,7 +23,7 @@ def classify_image(filepath):
     confidence = round(confidence * 100, 2)  # Convert the confidence to a percentage.
 
     if prob >= 0.5:
-        print(f"The ticket is real with {confidence}% confidence.")
+        print(f"The ticket is real with [bold]{confidence}%[/bold] confidence.")
 
     else:
-        print(f"The ticket is fake with {confidence}% confidence.")
+        print(f"The ticket is fake with [bold]{confidence}%[/bold] confidence.")

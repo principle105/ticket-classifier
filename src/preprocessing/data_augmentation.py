@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from PIL import Image, ImageEnhance
 from tqdm import tqdm
 
-from utils.file_utils import create_dirs
+from utils.file import create_dirs
 
 
 def _get_translation_amt(size):
