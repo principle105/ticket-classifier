@@ -20,4 +20,5 @@ Options:
 
 -   `augment_data` - Increases the size of the data by creating modified version of the data
 -   `train_model` - Trains the model
+-   `classify_image [FILEPATH]` - Determines if a meal ticket is real or fake.
 -   `info` - Gives information about the project
