@@ -1,0 +1,11 @@
+tensorflow-macos
+keras
+pillow
+matplotlib
+python-decouple
+tqdm
+imutils
+opencv-python
+typer
+pyfiglet
+rich

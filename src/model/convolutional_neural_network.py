@@ -2,6 +2,7 @@ from tensorflow import keras
 from tensorflow.python.keras import layers as L
 
 
+# fmt: off
 def build_model(input_shape):
     return keras.Sequential(
         [

@@ -10,6 +10,9 @@ from scripts.train_model import train_model
 # Initializing cli
 app = typer.Typer()
 
+# Initializing cli
+app = typer.Typer()
+
 logging.basicConfig(level=logging.INFO)
 
 
