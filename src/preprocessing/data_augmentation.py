@@ -85,7 +85,5 @@ def data_augmentation(dataset_path: str, augmented_path: str, n_augmentations: i
             enhancer = ImageEnhance.Brightness(img_for_shading)
             im_output = enhancer.enhance(brightness)
 
-            _save_img(augmented_path, img_name, "shaded", i)
-
             # Save the rotated image into the augmented folder
             im_output.save(_get_save_path(augmented_path, img_name, "shaded", i))
