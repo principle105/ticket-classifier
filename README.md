@@ -1,4 +1,4 @@
-# U of T thing
+# U of T Fake Meal Ticket Classifier
 
 # Configuration
 
