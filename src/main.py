@@ -1,26 +1,37 @@
-import argparse
 import logging
+
+import typer
+from pyfiglet import figlet_format
+from rich import print
 
 from scripts.augment_data import augment_data
 from scripts.train_model import train_model
 
+# Initializing cli
+app = typer.Typer()
+
 logging.basicConfig(level=logging.INFO)
 
-parser = argparse.ArgumentParser(
-	prog="U of T Hackathon Fake Meal Ticket Classifier",
-	description="Utilities for detecting if a meal ticket is real or fake."
-)
 
-parser.add_argument(
-	"task",
-	choices=["augment_data", "train_model"]
-)
+@app.command(name="augment_data")
+def _augment_data():
+    print("[green]Augmenting Data![/green]")
+    augment_data()
 
-args = parser.parse_args()
-run_type = args.task
 
-if run_type == "augment_data":
-	augment_data()
+@app.command(name="train_model")
+def _train_modal():
+    print("[green]Training Model![/green]")
+    train_model()
 
-elif run_type == "train_model":
-	train_model()
+
+@app.command()
+def info():
+    text = figlet_format("Fake Meal Ticket Classifier")
+    print(
+        f"[green]{text}[/green]\n\nUtilities for detecting if a meal ticket is real or fake."
+    )
+
+
+if __name__ == "__main__":
+    app()
