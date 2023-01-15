@@ -7,3 +7,4 @@ venv
 requirements.txt
 preprocessed_dataset
 model
+./logs
