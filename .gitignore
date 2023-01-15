@@ -4,4 +4,7 @@ __pycache__/
 .venv
 venv
 .vscode
+requirements.txt
 preprocessed_dataset
+model
+logs

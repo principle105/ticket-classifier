@@ -5,6 +5,10 @@ from pyfiglet import figlet_format
 from rich import print
 
 from scripts.augment_data import augment_data
+from scripts.train_model import train_model
+
+# Initializing cli
+app = typer.Typer()
 
 # Initializing cli
 app = typer.Typer()
@@ -16,6 +20,12 @@ logging.basicConfig(level=logging.INFO)
 def _augment_data():
     print("[green]Augmenting Data![/green]")
     augment_data()
+
+
+@app.command(name="train_model")
+def _train_modal():
+    print("[green]Training Model![/green]")
+    train_model()
 
 
 @app.command()

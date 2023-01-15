@@ -9,79 +9,83 @@ from tqdm import tqdm
 
 from utils.file_utils import create_dirs
 
-## NOTES: Run only when you have successfully added 10 fake ticket images to the food_ticket_fake folder!
-## Otherwise, you WILL encounter errors later!
+
+def _get_translation_amt(size):
+    # Dividing by 10 to avoid major translations
+    return random.randint(-int(size / 10), int(size / 10))
 
 
-def data_augmentation(dataset_path, augmented_path, n_augmentations):
+def _get_save_path(augmented_path: str, img_name: str, name: str, index: int):
+    return f"{augmented_path}/{img_name.split('_')[1].split('.')[0]}_{name}_{index}.jpg"
+
+
+def _save_img(file_name: str, modifier=None):
+    if modifier is None:
+        cv2.imwrite(file_name)
+        return
+
+    cv2.imwrite(
+        file_name,
+        cv2.cvtColor(modifier, cv2.COLOR_RGB2BGR),
+    )
+
+
+def data_augmentation(dataset_path: str, augmented_path: str, n_augmentations: int):
+    # Ensuring that the directories exist
     create_dirs(dataset_path)
     create_dirs(augmented_path)
 
-    # Iterate through each image we have
-    for imgName in tqdm(os.listdir(dataset_path)):
-        # Below is basically the image opening process
-        img_path = dataset_path + "/" + imgName
-        img = plt.imread(img_path)
-        imgHeight, imgWidth, _ = img.shape
+    # Iterating through each image
+    for img_name in tqdm(os.listdir(dataset_path)):
 
-        # This code below is specifically for brightness adjust (uses PIL)
+        img_path = f"{dataset_path}/{img_name}"
+        img = plt.imread(img_path)
+        img_height, img_width, _ = img.shape
+
+        # Opening the image for shading
         img_for_shading = Image.open(img_path)
 
         # Data augmentation loop
-        # We augment each photo 10 times per effect
         for i in range(n_augmentations):
 
-            # --------------------------Horizontal Translation-------------------------#
+            # Horizontal Translation
 
-            # Generate random number to translate by
-            # Divide by 10 to avoid major translations
-            # (i.e. large portions of the tickets go missing)
-            hori_translate = random.randint(-int(imgWidth / 10), int(imgWidth / 10))
+            translation_amt = _get_translation_amt(img_width)
+            translated = imutils.translate(img, translation_amt, 0)
 
-            translated = imutils.translate(img, hori_translate, 0)
-
-            # Name and save the translated image into the augmented folder
-            cv2.imwrite(
-                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_horiTranslate_{i}.jpg",
-                cv2.cvtColor(translated, cv2.COLOR_RGB2BGR),
+            _save_img(
+                _get_save_path(augmented_path, img_name, "horiTranslate", i), translated
             )
 
-            # --------------------------Vertical Translation-------------------------#
-            # Generate random number to translate by
-            # Divide by 10 to avoid major translations
-            # (i.e. large portions of the tickets go missing)
-            verti_translate = random.randint(-int(imgHeight / 10), int(imgHeight / 10))
+            # Vertical Translation
 
-            translated = imutils.translate(img, 0, verti_translate)
+            translation_amt = _get_translation_amt(img_height)
+            translated = imutils.translate(img, 0, translation_amt)
 
             # Name and save the translated image into the augmented folder
-            cv2.imwrite(
-                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_vertiTranslate_{i}.jpg",
-                cv2.cvtColor(translated, cv2.COLOR_RGB2BGR),
+            _save_img(
+                _get_save_path(augmented_path, img_name, "vertiTranslate", i),
+                translated,
             )
 
-            # --------------------------Rotation---------------------------------------#
+            # Rotation
 
             # Randomly rotate the image
             rotation = random.randint(0, 360)
             rotated = imutils.rotate(img, angle=rotation)
 
-            # Save the rotated image into the augmented folder
-            cv2.imwrite(
-                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_rotate_{i}.jpg",
-                cv2.cvtColor(rotated, cv2.COLOR_RGB2BGR),
-            )
+            _save_img(_get_save_path(augmented_path, img_name, "rotate", i), rotated)
 
             # --------------------------Brightness Adjust------------------------------#
 
             # Randomly discolour the image
-            brightness = random.uniform(0.5, 1.5)  # Generate a random shade
+            brightness = random.uniform(0.5, 1.5)
 
-            # image brightness enhancer
+            # Image brightness enhancer
             enhancer = ImageEnhance.Brightness(img_for_shading)
             im_output = enhancer.enhance(brightness)
 
+            _save_img(augmented_path, img_name, "shaded", i)
+
             # Save the rotated image into the augmented folder
-            im_output.save(
-                f"{augmented_path}/{imgName.split('_')[1].split('.')[0]}_shaded_{i}.jpg"
-            )
+            im_output.save(_get_save_path(augmented_path, img_name, "shaded", i))
