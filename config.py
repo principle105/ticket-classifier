@@ -9,7 +9,8 @@ MODEL_PATH = "./model/cnn.h5"
 DATA_DIR = "./preprocessed_dataset"
 LOG_DIR = "./logs"
 
-N_AUGMENTATIONS = 10
+N_AUGMENTATIONS_REAL = 5
+N_AUGMENTATIONS_FAKE = 10
 
 MODEL_INPUT_SHAPE = (256, 256)
 BATCH_SIZE = 64
