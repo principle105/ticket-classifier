@@ -1,18 +1,15 @@
-from decouple import config
+REAL_FOOD_TICKET_PATH_DATASET = "./dataset/food_ticket_real"
+FAKE_FOOD_TICKET_PATH_DATASET = "./dataset/food_ticket_fake"
 
-REAL_FOOD_TICKET_PATH_DATASET = config("REAL_FOOD_TICKET_PATH_DATASET")
-FAKE_FOOD_TICKET_PATH_DATASET = config("FAKE_FOOD_TICKET_PATH_DATASET")
+REAL_FOOD_TICKET_PATH_PREPROCESSED = "./preprocessed_dataset/food_ticket_real"
+FAKE_FOOD_TICKET_PATH_PREPROCESSED = "./preprocessed_dataset/food_ticket_fake"
 
-REAL_FOOD_TICKET_PATH_PREPROCESSED = config("REAL_FOOD_TICKET_PATH_PREPROCESSED")
-FAKE_FOOD_TICKET_PATH_PREPROCESSED = config("FAKE_FOOD_TICKET_PATH_PREPROCESSED")
+MODEL_PATH = "./model/cnn.h5"
 
-MODEL_PATH = config("MODEL_PATH")
+DATA_DIR = "./preprocessed_dataset"
+LOG_DIR = "./logs"
 
-DATA_DIR = config("DATA_DIR")
-LOG_DIR = config("LOG_DIR")
-
-N_AUGMENTATIONS = config("N_AUGMENTATIONS", cast=int)
-MODEL_IMAGE_WIDTH = config("MODEL_IMAGE_WIDTH", cast=int)
+N_AUGMENTATIONS = 10
 
 MODEL_INPUT_SHAPE = (256, 256)
 BATCH_SIZE = 64
