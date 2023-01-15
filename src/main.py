@@ -19,10 +19,12 @@ def _augment_data():
     print("[green]Augmenting Data![/green]")
     augment_data()
 
+
 @app.command(name="train_model")
 def _train_model():
     print("[green]Training Model![/green]")
     train_model()
+
 
 @app.command(name="classify_image")
 def _classify_image(filepath: str):

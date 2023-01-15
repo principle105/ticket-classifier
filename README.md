@@ -1,4 +1,8 @@
-# U of T Fake Meal Ticket Classifier
+<div align="center">
+    <img src="./src/ticket.png"  height="200"></img>
+    <h1>U of T Fake Meal Ticket Classifier</h1>
+    <p>Utilities for detecting if a meal ticket is real or fake.</p>
+</div>
 
 # Installation
 
